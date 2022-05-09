@@ -1,0 +1,13 @@
+int distributeChocolate(vector<int> arr, int m){
+    if(m > arr.size()){
+        return -1;
+    }
+    sort(arr.begin(),arr.end());
+    int i = m-1;
+    int ans = INT_MAX;
+    while(i<arr.size()){
+        ans = min(ans,arr[i] - arr[i - m + 1]);
+        i++;
+    }
+    return ans;
+}
