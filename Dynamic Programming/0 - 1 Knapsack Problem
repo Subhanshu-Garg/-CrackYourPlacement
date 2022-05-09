@@ -1,0 +1,26 @@
+class Solution
+{
+    public:
+    //Function to return max value that can be put in knapsack of capacity W.
+    int t[1002][1002];
+    Solution(){
+        memset(t,-1,sizeof(t));
+    }
+    
+    int knapSack(int W, int wt[], int val[], int n) 
+    { 
+       // Your code here
+       if(W==0 || n == 0){
+           return 0;
+       }
+       if(t[W][n] != -1){
+           return t[W][n];
+       }
+       if(W-wt[n-1] >= 0){
+           return t[W][n] = max(knapSack(W-wt[n-1],wt,val,n-1)+val[n-1],knapSack(W,wt,val,n-1));
+       }
+       else {
+           return t[W][n] = knapSack(W,wt,val,n-1);
+       }
+    }
+};
