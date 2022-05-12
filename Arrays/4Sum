@@ -1,0 +1,38 @@
+//Need to solve as kSum, but i will solve it later looks easy
+vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        if(nums.size() < 4){
+            return {};
+        }
+        sort(nums.begin(),nums.end());
+        vector<vector<int>> ans;
+        for(int i=0;i<nums.size();i++){
+            if(i>0 && nums[i] == nums[i-1]){
+                continue;
+            }
+            int newTarget = target - nums[i];
+            
+            for(int j=i+1;j<nums.size();j++){
+                if(j>i+1 && nums[j] == nums[j-1]){
+                    continue;
+                }
+                int sum = newTarget - nums[j];
+                int s = j+1, e = nums.size() -1;
+                while(s<e){
+                    if(nums[s] + nums[e] > sum){
+                        e--;
+                    }
+                    else if(nums[s] + nums[e] < sum){
+                        s++;
+                    }
+                    else{
+                        ans.push_back({nums[i],nums[j],nums[s],nums[e]});
+                        while(s+1 < nums.size() && nums[s+1] == nums[s]) s++;
+                        while(e-1 >= 0 && nums[e-1] == nums[e]) e--;
+                        s++;
+                        e--;
+                    }
+                } 
+            }
+        }
+        return ans;
+    }
