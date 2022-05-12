@@ -1,4 +1,4 @@
-
+//Nice Question
     int longestCommonSubstr (string S1, string S2, int n, int m)
     {
         // your code here
