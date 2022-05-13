@@ -1,0 +1,38 @@
+void powerSet(vector<vector<int>>& res,vector<int> subset,vector<int>& nums,int start){
+        if(start == nums.size()){
+            res.push_back(subset);
+            return;
+        }
+        else if(start > nums.size()){
+            return;
+        }
+        
+        int count = 1;
+        int j = start + 1;
+        while(j<nums.size() && nums[j] == nums[j-1]){
+            count++;
+            j++;
+        }
+        
+        for(int i=0;i<=count;i++){
+            int k = i;
+            while(k--){
+                subset.push_back(nums[start]);
+            }
+            powerSet(res,subset,nums,start + count);
+            k = i;
+            while(k--){
+                subset.pop_back();
+            }
+        }
+        return;
+    }
+    
+    
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        vector<vector<int>> res;
+        vector<int> subset;
+        sort(nums.begin(),nums.end());
+        powerSet(res,subset,nums,0);
+        return res;
+    }
