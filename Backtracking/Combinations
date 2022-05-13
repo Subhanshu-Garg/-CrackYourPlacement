@@ -1,0 +1,20 @@
+vector<vector<int>> combine(int n, int k) {
+        if(k==0){
+            return {{}};
+        }
+        else if(n==0){
+            return {};
+        }
+        
+        vector<vector<int>> choice1 = combine(n-1,k-1);
+        for(int  i=0;i<choice1.size();i++){
+            choice1[i].push_back(n);
+        }
+        
+        vector<vector<int>> choice2 = combine(n-1,k);
+        for(int i=0;i<choice2.size();i++){
+            choice1.push_back(choice2[i]);
+        }
+        
+        return choice1;
+    }
