@@ -1,0 +1,20 @@
+ void subsets(vector<int>& nums,int n,vector<int> ans,vector<vector<int>>& res){
+        if(n==0){
+            res.push_back(ans);
+            return;
+        }
+        
+        ans.push_back(nums[n-1]);
+        subsets(nums,n-1,ans,res);
+        ans.pop_back();
+        subsets(nums,n-1,ans,res);
+        return;
+    }
+    
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>> res;
+        vector<int> ans;
+        subsets(nums,nums.size(),ans,res);
+        return res;
+        
+    }
