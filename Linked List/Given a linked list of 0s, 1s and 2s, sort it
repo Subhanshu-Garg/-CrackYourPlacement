@@ -1,0 +1,62 @@
+ Node* segregate(Node *head) {
+        
+        // Add code here
+        Node* head0 = NULL;
+        Node* temp0 = NULL;
+        Node* head1 = NULL;
+        Node* temp1 = NULL;
+        Node* head2 = NULL;
+        Node* temp2 = NULL;
+        
+        
+        while(head != NULL){
+            if(head->data == 0){
+                if(temp0 != NULL){
+                    temp0->next = head;
+                    temp0 = temp0->next;
+                }
+                else {
+                    head0 = head;
+                    temp0 = head;
+                }
+            }
+            else if(head->data == 1){
+                if(temp1 != NULL){
+                    temp1->next = head;
+                    temp1 = temp1->next;
+                }
+                else {
+                    head1 = head;
+                    temp1 = head;
+                }
+            }
+            else if(head->data == 2){
+                if(temp2 != NULL){
+                    temp2->next = head;
+                    temp2 = temp2->next;
+                }
+                else {
+                    head2 = head;
+                    temp2 = head;
+                }
+            }
+            head = head->next;
+            if(temp0) temp0->next = NULL;
+            if(temp1) temp1->next = NULL;
+            if(temp2) temp2->next = NULL;
+        }
+        
+        Node* temp = head0;
+        while(temp && temp->next != NULL){
+            temp = temp->next;
+        }
+        if(temp) temp->next = head1;
+        
+        while(temp && temp->next != NULL){
+            temp = temp->next;
+        }
+        if(temp) temp->next = head2;
+            
+        
+        return head0;
+    }
