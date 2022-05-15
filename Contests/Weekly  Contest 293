@@ -1,0 +1,58 @@
+ //Q.1 Remove anagrams(words which with same alphabets)
+ vector<string> removeAnagrams(vector<string>& words) {
+        if(words.empty()){
+            return {};
+        }
+      
+        int i = 1;
+        while(i<words.size()){
+            string st1 = words[i];
+            string st2 = words[i-1];
+            sort(st1.begin(),st1.end());
+            sort(st2.begin(),st2.end());
+            
+            if(st1 == st2){
+                words.erase(words.begin() + i);
+            }
+            else {
+                
+                i++;
+            }
+            
+        }
+        
+        return words;
+    }
+    
+    
+    //Q2 
+    int maxConsecutive(int bottom, int top, vector<int>& special) {
+        int ans = -1;
+        sort(special.begin(),special.end());
+        ans = special[0] - bottom;
+        ans = max(ans,top-special[special.size() - 1]);
+        
+        for(int i=1;i<special.size();i++){
+            ans = max(ans,special[i] - special[i-1]-1);
+        }
+        
+        return ans;
+    }
+    
+    //Q3
+     int largestCombination(vector<int>& nums) {
+        // vector<int> b(25);
+        int ans = 0;
+        for(int i=0;i<25;i++){
+            int c = 0;
+            for(auto e : nums){
+                if(e>>i & 1 == 1){
+                    c++;
+                }
+            }
+            ans = max(ans,c);
+        }
+        return ans;
+    }
+    
+    //Q4 yet to do...
