@@ -1,0 +1,26 @@
+int countArrangement2(vector<int>& nums,int idx){
+        if(idx == (nums.size())){
+            return 1;
+        }
+        
+        int count = 0;
+        
+        for(int i = idx;i<nums.size();i++){
+            if(!(nums[i] % (idx+1)) || !((idx+1) % nums[i])){
+                swap(nums[i],nums[idx]);
+                int r = countArrangement2(nums,idx+1);
+                count += r;
+                swap(nums[i],nums[idx]);
+            }
+        }
+        return count;
+    }
+    
+    int countArrangement(int n) {
+        vector<int> nums(n);
+        for(int i=0;i<n;i++){
+            nums[i] = i + 1;
+        }
+        
+        return countArrangement2(nums,0);
+    }
