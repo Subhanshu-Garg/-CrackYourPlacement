@@ -1,0 +1,46 @@
+
+// using BFS, I know taking too much lines, will try to reduce it furthur
+bool isSameTree(TreeNode* p, TreeNode* q) {
+        queue<TreeNode*> qp;
+        queue<TreeNode*> qq;
+        
+        if(p) qp.push(p);
+        if(q) qq.push(q);
+        
+        while(!qp.empty() && !qq.empty()){
+            if(qp.front()->val != qq.front()->val){
+                return false;
+            }
+            TreeNode* tl1 = qp.front()->left;
+            TreeNode* tr1 = qp.front()->right;
+            TreeNode* tl2 = qq.front()->left;
+            TreeNode* tr2 = qq.front()->right;
+            qp.pop();
+            qq.pop();
+            if(tl1 && tl2){
+                qp.push(tl1);
+                qq.push(tl2);
+            } else if(tl1){
+                return  false;
+            }
+            else if(tl2) return false;
+            if(tr1 && tr2){
+                qp.push(tr1);
+                qq.push(tr2);
+            } else if(tr1){
+                return false;
+            }
+            else if(tr2){
+                return false;
+            }
+            
+        }
+        
+        if(qp.empty() && qq.empty()){
+            return true;
+        }
+        else {
+            return false;
+        }
+        
+    }
