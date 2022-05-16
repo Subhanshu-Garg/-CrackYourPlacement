@@ -1,0 +1,31 @@
+bool isIdentical(TreeNode* root1,TreeNode* root2){
+        if(!root1 && !root2){
+            return true;
+        }
+        else if(!root1 || !root2){
+            return false;
+        }
+        
+        if(root1->val != root2->val){
+            return false;
+        }
+        
+        return isIdentical(root1->left,root2->left) && isIdentical(root1->right,root2->right);
+        
+    }
+    TreeNode* invertTree(TreeNode* root){
+        if(!root) return root;
+        
+        root->left = invertTree(root->left);
+        root->right = invertTree(root->right);
+        
+        TreeNode* temp = root->left;
+        root->left = root->right;
+        root->right = temp;
+        
+        return root;
+    }
+    bool isSymmetric(TreeNode* root) {
+        TreeNode* to_check = invertTree(root->left);
+        return isIdentical(to_check,root->right);
+    }
