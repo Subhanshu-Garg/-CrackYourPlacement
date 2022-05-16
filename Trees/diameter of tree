@@ -1,0 +1,20 @@
+int diameterHeightofBT(TreeNode* root, int& h){
+        if(!root){
+            h = 0;
+            return 0;
+        }
+        
+        int lh = -1;
+        int rh = -1;
+        int ld = diameterHeightofBT(root->left,lh);
+        int rd = diameterHeightofBT(root->right,rh);
+        
+        h = max(lh+1,rh+1);
+        
+        return max(ld,max(rd,lh + rh));
+    }
+    
+    int diameterOfBinaryTree(TreeNode* root) {
+        int h = -1;
+        return diameterHeightofBT(root,h);
+    }
