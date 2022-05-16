@@ -1,0 +1,31 @@
+ TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2) {
+        if(!root1){
+            return root2;
+        }
+        else if(!root2){
+            return root1;
+        }
+        
+        stack<pair<TreeNode*,TreeNode*>> st;
+        st.push({root1,root2});
+        while(!st.empty()){
+            TreeNode* temp1 = st.top().first;
+            TreeNode* temp2 = st.top().second;
+            st.pop();
+            temp1->val += temp2->val;
+            if(temp1->left && temp2->left){
+                st.push({temp1->left,temp2->left});
+            }
+            else if(temp2->left){
+                temp1->left = temp2->left;
+            }
+            
+            if(temp1->right && temp2->right){
+                st.push({temp1->right,temp2->right});
+            }
+            else if(temp2->right){
+                temp1->right = temp2->right;
+            }
+        }
+        return root1;
+    }
