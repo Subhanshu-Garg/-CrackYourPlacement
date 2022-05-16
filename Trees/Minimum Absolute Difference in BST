@@ -1,0 +1,30 @@
+// Can be done by inorder Traversal more easily
+
+int getMinimumDifference(TreeNode* root) {
+        if(!root || !root->left && !root->right){
+            return INT_MAX;
+        }
+        
+        TreeNode* t1 = root->left;
+        while(t1 && t1->right != NULL){
+            t1 = t1->right;
+        }
+        TreeNode* t2 = root->right;
+        while(t2 && t2->left != NULL){
+            t2 = t2->left;
+        }
+        int mn;
+        if(t1 && t2){
+             mn = min(root->val - t1->val,t2->val - root->val);
+        }
+        else if(t1){
+            mn = root->val - t1->val;
+        }
+        else if(t2){
+            mn = t2->val - root->val;
+        }
+     
+        int l = getMinimumDifference(root->left);
+        int r = getMinimumDifference(root->right);
+        return min(mn,min(l,r));
+    }
