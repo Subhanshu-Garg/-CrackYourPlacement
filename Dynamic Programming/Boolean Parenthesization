@@ -1,0 +1,53 @@
+int t[201][201][2];
+    int solve (string& s, int i, int j,bool isTrue){
+        if(t[i][j][(int)isTrue] != -1){
+            return t[i][j][(int)isTrue];
+        }
+        if(i>j) return 0;
+        if(i==j){
+            if(isTrue == true) return s[i] == 'T';
+            else if(isTrue == false) return s[i] == 'F';
+        }
+        int res = 0;
+        for(int k = i+1;k<j;k+=2){
+            int lt = solve(s,i,k-1,true);
+            int lf = solve(s,i,k-1,false);
+            int rt = solve(s,k+1,j,true);
+            int rf = solve(s,k+1,j,false);
+            if(s[k] == '&'){
+                if(isTrue){
+                    res += lt*rt;
+                }
+                else {
+                    res += lf*rt + lt*rf + lf*rf;
+                }
+                
+            }
+            else if(s[k] == '|'){
+                if(isTrue){
+                    res += lt*rt + lt*rf + lf*rt;
+                }
+                else {
+                    res+= lf * rf;
+                }
+                
+            }
+            else if(s[k] == '^'){
+                if(isTrue){
+                    res += lt*rf + lf*rt;
+                }
+                else {
+                    res += lt*rt + lf*rf;
+                }
+            }
+        }
+        
+        return t[i][j][(int)isTrue] = res%1003;
+    }
+
+    int countWays(int N, string S){
+        // code here
+        memset(t,-1,sizeof(t));
+        return solve(S,0,N-1,true);
+        
+    }
