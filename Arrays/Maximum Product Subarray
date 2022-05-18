@@ -1,0 +1,22 @@
+ //khatarnak---
+ 
+ int maxProduct(vector<int>& nums) {
+        int ans = nums[0];
+        int tillMax = ans;
+        int tillMin = ans;
+        
+        for(int i=1;i<nums.size();i++){
+            
+            if(nums[i] < 0){
+                swap(tillMax,tillMin);
+            }
+            
+            tillMax = max(tillMax*nums[i],nums[i]);
+            tillMin = min(tillMin*nums[i],nums[i]);
+            
+            ans = max(tillMax,ans);
+        }
+        
+        return ans;
+        
+    }
