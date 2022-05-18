@@ -1,0 +1,30 @@
+ int t[101][10001];
+    Solution(){
+        memset(t,-1,sizeof(t));
+    }
+    int superEggDrop(int k, int n) {
+        if(k == 1 || n==1){
+            return n;
+        }
+        else if(n==0){
+            return 0;
+        }
+        if(t[k][n] != -1) return t[k][n];
+        
+        int ans = INT_MAX;
+        int s = 1, e = n;
+        while(s<=e){
+            int i = s + (e-s)/2;
+            int t1 = superEggDrop(k-1,i-1);
+            int t2 = superEggDrop(k,n-i);
+            if(t1 > t2){
+                e = i-1;
+            }
+            else {
+                s = i + 1;
+            }
+            ans = min(ans,max(t1+1,t2+1)); 
+        }
+        
+        return t[k][n] = ans;
+    }
